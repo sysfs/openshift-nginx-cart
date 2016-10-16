@@ -1,7 +1,7 @@
 
 worker_processes  1;
 
-error_log  log/nginx/error.log warn;
+error_log	<%= ENV['OPENSHIFT_LOG_DIR'] %>/nginx/error.log warn;
 pid        run/nginx.pid;
 
 
@@ -10,11 +10,11 @@ events {
 }
 
 http {
-    client_body_temp_path tmp/c;
-    proxy_temp_path tmp/p;
-    fastcgi_temp_path tmp/f;
-    uwsgi_temp_path tmp/u;
-    scgi_temp_path tmp/s;
+    client_body_temp_path	<%= ENV['OPENSHIFT_TMP_DIR'] %>/client_body_cache;
+    proxy_temp_path	<%= ENV['OPENSHIFT_TMP_DIR'] %>/proxy_cache;
+    fastcgi_temp_path	<%= ENV['OPENSHIFT_TMP_DIR'] %>/fastcgi_cache;
+    uwsgi_temp_path	<%= ENV['OPENSHIFT_TMP_DIR'] %>/uwsgi_cache;
+    scgi_temp_path	<%= ENV['OPENSHIFT_TMP_DIR'] %>/scgi_cache;
 
     include       mime.types;
     default_type  application/octet-stream;
@@ -23,7 +23,7 @@ http {
                       '$status $body_bytes_sent "$http_referer" '
                       '"$http_user_agent" "$http_x_forwarded_for" "$server_port"';
 
-    access_log  log/nginx/access.log  main;
+    access_log	<%= ENV['OPENSHIFT_LOG_DIR'] %>/nginx/access.log	main;
 
     sendfile        on;
     #tcp_nopush     on;

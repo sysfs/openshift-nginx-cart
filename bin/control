@@ -4,12 +4,12 @@ source $OPENSHIFT_CARTRIDGE_SDK_BASH
 
 function start {
   echo "Starting nginx cartridge"
-  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -g "error_log $OPENSHIFT_NGINX_DIR/log/nginx/error.log;" -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf
+  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -g "error_log $OPENSHIFT_LOG_DIR/nginx/error.log;" -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf
 }
 
 function stop {
   echo "Stopping nginx cartridge"
-  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -g "error_log $OPENSHIFT_NGINX_DIR/log/nginx/error.log;" -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf -s quit
+  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf -s quit
 }
 
 function restart {
