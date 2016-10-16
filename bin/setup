@@ -2,6 +2,6 @@
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
 chmod 0755 $OPENSHIFT_NGINX_DIR/usr/sbin/nginx
-mkdir $OPENSHIFT_LOG_DIR/nginx
+mkdir $OPENSHIFT_NGINX_DIR/run $OPENSHIFT_LOG_DIR/nginx
 
 exit 0
