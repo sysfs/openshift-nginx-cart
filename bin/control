@@ -1,0 +1,32 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+function start {
+  echo "Starting nginx cartridge"
+  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -g "error_log $OPENSHIFT_NGINX_DIR/log/nginx/error.log;" -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf
+}
+
+function stop {
+  echo "Stopping nginx cartridge"
+  $OPENSHIFT_NGINX_DIR/usr/sbin/nginx -p $OPENSHIFT_NGINX_DIR -g "error_log $OPENSHIFT_NGINX_DIR/log/nginx/error.log;" -c $OPENSHIFT_NGINX_DIR/etc/nginx/nginx.conf -s quit
+}
+
+function restart {
+  stop
+  start
+}
+
+function status {
+  status $OPENSHIFT_NGINX_DIR/usr/sbin/nginx
+}
+
+case "$1" in
+  start)                start ;;
+  stop)                 stop ;;
+  restart)              restart ;;
+  status)               status ;;
+  *)           exit 0
+esac
+
+exit 0

@@ -1,0 +1,57 @@
+---
+Name: nginx
+Cartridge-Short-Name: NGINX
+Display-Name: Nginx Cartridge 0.1
+Description: A cartridge for running nginx (v. 1.10)
+Version: '1.10'
+Versions:
+- '1.10'
+License: BSD 2-Clause
+Vendor: Nginx, Inc.
+Cartridge-Version: 0.0.1
+Cartridge-Vendor: sysfs
+Categories:
+- service
+- web_framework
+Provides:
+- nginx-1.10
+- nginx
+Cart-Data:
+- Key: OPENSHIFT_MOCK_EXAMPLE
+  Type: environment
+  Description: An example environment variable using ERB processing
+Publishes:
+Subscribes:
+  set-env:
+    Type: ENV:*
+    Required: false
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols: [http, ws]
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+    Options:
+      websocket: true
+  - Frontend: /health
+    Backend: ''
+    Options:
+      health: true
+- Private-IP-Name: SSL_IP
+  Private-Port-Name: SSL_PORT
+  Private-Port: 8443
+  Public-Port-Name: SSL_PROXY_PORT
+  Protocols: [https]
+  Options:
+    ssl_to_gear: true
+Scaling:
+  Min: 1
+  Max: -1
+Install-Build-Required: false
+Metrics:
+- uptime

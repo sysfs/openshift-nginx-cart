@@ -1,0 +1,6 @@
+#!/bin/bash -eu
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+chmod 0755 $OPENSHIFT_NGINX_DIR/usr/sbin/nginx
+
+exit 0
